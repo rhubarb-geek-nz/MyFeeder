@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="9611rhubarb.geek.nz.MyFeeder"
+    Publisher="CN=4A20E80D-8F0C-4307-920F-3EDFD17061EA"
+    Version="1.1.42.0" />
+
+  <mp:PhoneIdentity PhoneProductId="60e43050-f899-45f3-9c28-b754e0ace8a9" PhonePublisherId="f3b6e328-9688-44ea-8cfa-01ca600f19ed" />
+
+  <Properties>
+    <DisplayName>MyFeeder</DisplayName>
+    <PublisherDisplayName>rhubarb.geek.nz</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="MyFeeder.App">
+      <uap:VisualElements
+        DisplayName="MyFeeder"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png"
+        Description="Manage your Snapper card"
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="MyFeeder" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="transparent" />
+        <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badge"/>
+       </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <uap:Capability Name="sharedUserCertificates" />
+    <DeviceCapability Name="usb">
+      <Device Id="vidpid:04cc 0531">
+        <Function Type="classId:ff * *" />
+      </Device>
+    </DeviceCapability>
+  </Capabilities>
+</Package>

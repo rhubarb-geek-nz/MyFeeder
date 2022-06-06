@@ -1,0 +1,54 @@
+<UserControl
+    x:Class="MyFeeder.ReaderPivotControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyFeeder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock HorizontalAlignment="Left" Margin="0,5,30,5" x:Name="ReaderIssuerName" x:Uid="ReaderIssuer" Grid.Column="0" Grid.Row="0" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,5,30,5" x:Name="ReaderIssuerValue" Grid.Column="1" Grid.Row="0" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,5,30,5" x:Name="ReaderPANName" x:Uid="ReaderPAN" Grid.Column="0" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,5,30,5" x:Name="ReaderPANValue" Grid.Column="1" Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,5,30,5" x:Name="ReaderExpiryName" x:Uid="ReaderExpiry" Grid.Column="0" Grid.Row="2" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,5,30,5" x:Name="ReaderExpiryValue" Grid.Column="1" Grid.Row="2" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,5,30,5" x:Name="ReaderBalanceName" x:Uid="ReaderBalance" Grid.Column="0" Grid.Row="3" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,5,30,5" x:Name="ReaderBalanceValue" Grid.Column="1" Grid.Row="3" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" />
+        </Grid>
+
+        <Grid x:Name="iconGrid" >
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <BitmapIcon x:Name="nfcIcon" UriSource="Assets/nfc.png" Grid.Column="1" Grid.Row="1" Foreground="{ThemeResource SystemColorControlAccentColor}" Width="60" Height="120" />
+
+        </Grid>
+    </Grid>
+    
+</UserControl>

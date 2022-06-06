@@ -1,0 +1,13 @@
+<Application
+    x:Class="MyFeeder.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyFeeder" >
+
+    <Application.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">MyFeeder</x:String>
+        <x:String x:Key="NoReaderHelp">The NXP PN531 reader needs to be configured to use the generic Microsoft "WinUsb Device" driver and have "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_04CC&amp;PID_0531\...\Device Parameters\DeviceInterfaceGUID" set to "{ec55ee47-5758-4378-926b-68ed0aec8170}".</x:String>
+    </Application.Resources>
+
+</Application>
