@@ -20,7 +20,7 @@
  */
 
 /* 
- * $Id: TopupPage.xaml.cs 45 2022-06-06 12:15:22Z rhubarb-geek-nz $
+ * $Id: TopupPage.xaml.cs 46 2022-06-07 23:21:59Z rhubarb-geek-nz $
  */
 
 using nz.geek.rhubarb.utils;
@@ -224,11 +224,7 @@ namespace MyFeeder
                         textInstruction = app.resourceLoader.GetString("ProvidePaymentDetails");
                         visInstruction = Visibility.Visible;
                         enableEditButtons = true;
-
-                        if (transaction.entryMode!=TopupTransaction.ENTRYMODE_MSPAY)
-                        {
-                            ccEntryVisibility = Visibility.Visible;
-                        }
+                        ccEntryVisibility = Visibility.Visible;
 
                         if (!transaction.bAutomaticEntryCC)
                         {
@@ -287,14 +283,6 @@ namespace MyFeeder
                     case TopupTransaction.STEP_PAYMENT:
                         textInstruction = app.resourceLoader.GetString("PerformingPayment");
                         visInstruction = Visibility.Visible;
-                        if (transaction.entryMode==TopupTransaction.ENTRYMODE_MSPAY)
-                        {
-                            /* don't show busy if doing Microsoft Pay as it's 
-                             * UI will be visible during this phase
-                             */
-//                            busy = false;
-                            /* on the other hand it, may not always appear, so leave busy alone */
-                        }
                         break;
                     case TopupTransaction.STEP_TOPUP:
                         textInstruction = app.resourceLoader.GetString("PerformingCredit");

@@ -20,7 +20,7 @@
  */
 
 /* 
- * $Id: App.xaml.cs 45 2022-06-06 12:15:22Z rhubarb-geek-nz $
+ * $Id: App.xaml.cs 46 2022-06-07 23:21:59Z rhubarb-geek-nz $
  */
 
 using System;
@@ -44,7 +44,6 @@ namespace MyFeeder
     sealed partial class App : Application
     {
         public static readonly bool doTraceSuspend = false, doTraceData = false;
-        public readonly bool isPaymentApiSupported = ApiInformation.IsTypePresent("Windows.ApplicationModel.Payments.PaymentMethodData");
         internal List<USBHandler> usbReaders = new List<USBHandler>();
         public PageEventHandler pageEventHandler = null;
         internal CardTransaction currentTransaction = null;

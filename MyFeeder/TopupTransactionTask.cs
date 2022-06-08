@@ -20,7 +20,7 @@
  */
 
 /* 
- * $Id: TopupTransactionTask.cs 45 2022-06-06 12:15:22Z rhubarb-geek-nz $
+ * $Id: TopupTransactionTask.cs 46 2022-06-07 23:21:59Z rhubarb-geek-nz $
  */
 
 using System;
@@ -140,68 +140,12 @@ namespace MyFeeder
 
                             case TopupTransaction.STEP_PAYMENT:
                                 {
-                                    MicrosoftPay msPay = null;
-
                                     System.Diagnostics.Debug.WriteLine("task: TopupTransaction.STEP_PAYMENT");
                                     try
                                     {
                                         PaymentResult pay = null;
                                         CreditCardState creditCard = transaction.creditCard;
                                         string cvv = transaction.cvv;
-                                        string cardHolderName = "myfeeder";
-
-                                        if (app.isPaymentApiSupported && (creditCard == null))
-                                        {
-                                            System.Diagnostics.Debug.WriteLine("payment without a credit card");
-                                            string total = app.resourceLoader.GetString("PaymentTotal");
-                                            msPay = new MicrosoftPay();
-
-                                            string item = Utils.cardNumberWithSpace(Hex.bytesToHex(transaction.purseInfo, 8, 8));
-                                            string amount = Utils.toMoney(transaction.amount);
-
-                                            msPay.request = msPay.makeTopupPaymentRequest(total, item,amount);
-                                            msPay.mediator = new PaymentMediator();
-                                            msPay.submit = await msPay.mediator.SubmitPaymentRequestAsync(msPay.request);
-                                            PaymentResponse response = msPay.submit.Response;
-                                            PaymentRequestStatus status = msPay.submit.Status;
-
-                                            System.Diagnostics.Debug.WriteLine("Microsoft Pay "+status);
-
-                                            switch (status)
-                                            {
-                                                case PaymentRequestStatus.Succeeded:
-                                                    System.Diagnostics.Debug.WriteLine("PaymentMethodId " + response.PaymentToken.PaymentMethodId);
-
-                                                    if (MicrosoftPay.BASIC_CARD.Equals(response.PaymentToken.PaymentMethodId))
-                                                    {
-                                                        BasicCardResponse basicCard = msPay.ReadCardResponse(response.PaymentToken.JsonDetails);
-                                                        string issuer ;
-                                                        string pan = basicCard.CardNumber;
-                                                        int month = Int32.Parse(basicCard.ExpiryMonth);
-                                                        int year = Int32.Parse(basicCard.ExpiryYear) % 100; /* just last two digits */
-                                                        switch (pan[0])
-                                                        {
-                                                            case '4': issuer = "VISA"; break;
-                                                            case '5': issuer = "MASTERCARD"; break;
-                                                            default: issuer = "UNKNOWN"; break;
-                                                        }
-                                                        creditCard = new CreditCardState(issuer,pan,month,year);
-                                                        cvv = basicCard.CardSecurityCode;
-                                                        cardHolderName = basicCard.CardholderName;
-                                                    }
-                                                    else
-                                                    {
-                                                        throw new Exception("Unknown payment method : " + response.PaymentToken.PaymentMethodId);
-                                                    }
-                                                    break;
-                                                case PaymentRequestStatus.Canceled:
-                                                    msPay = null;
-                                                    throw new Exception(app.resourceLoader.GetString("PaymentCancelled"));
-                                                default:
-                                                    msPay = null;
-                                                    throw new Exception(app.resourceLoader.GetString("PaymentError"));
-                                            }
-                                        }
 
                                         {
                                             PaymentInstrumentDetail pid = null; //new PaymentInstrumentDetail();
@@ -239,13 +183,6 @@ namespace MyFeeder
                                         transaction.step = TopupTransaction.STEP_CARDWAIT;
 
                                         bContinue = true;
-
-                                        if (msPay != null)
-                                        {
-                                            MicrosoftPay msp = msPay;
-                                            msPay = null;
-                                            await msp.submit.Response.CompleteAsync(PaymentRequestCompletionStatus.Succeeded);
-                                        }
                                     }
                                     catch (Exception ex)
                                     {
@@ -253,13 +190,6 @@ namespace MyFeeder
                                         transaction.resultMessage = ex.Message;
 
                                         System.Diagnostics.Debug.WriteLine("task: TopupTransaction.STEP_PAYMENT_FAILED " + transaction.resultMessage);
-
-                                        if (msPay != null)
-                                        {
-                                            MicrosoftPay msp = msPay;
-                                            msPay = null;
-                                            await msp.submit.Response.CompleteAsync(PaymentRequestCompletionStatus.Failed);
-                                        }
                                     }
                                     finally
                                     {
@@ -272,14 +202,6 @@ namespace MyFeeder
                                             }
 
                                             System.Diagnostics.Debug.WriteLine("task: TopupTransaction.STEP_TOPUP_PAYMENT " + transaction.resultMessage);
-                                        }
-
-                                        if (msPay != null)
-                                        {
-                                            /* if this is still left over, get rid of it */
-                                            MicrosoftPay msp = msPay;
-                                            msPay = null;
-                                            Windows.Foundation.IAsyncAction task = msp.submit.Response.CompleteAsync(PaymentRequestCompletionStatus.Failed);
                                         }
                                     }
                                 }

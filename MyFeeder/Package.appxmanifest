@@ -9,7 +9,7 @@
   <Identity
     Name="9611rhubarb.geek.nz.MyFeeder"
     Publisher="CN=4A20E80D-8F0C-4307-920F-3EDFD17061EA"
-    Version="1.1.42.0" />
+    Version="1.1.43.0" />
 
   <mp:PhoneIdentity PhoneProductId="60e43050-f899-45f3-9c28-b754e0ace8a9" PhonePublisherId="f3b6e328-9688-44ea-8cfa-01ca600f19ed" />
 

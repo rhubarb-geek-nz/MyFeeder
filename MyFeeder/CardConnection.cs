@@ -20,13 +20,14 @@
  */
 
 /* 
- * $Id: CardConnection.cs 45 2022-06-06 12:15:22Z rhubarb-geek-nz $
+ * $Id: CardConnection.cs 46 2022-06-07 23:21:59Z rhubarb-geek-nz $
  */
 
 using System;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.SmartCards;
+using nz.geek.rhubarb.utils;
 
 namespace MyFeeder
 {

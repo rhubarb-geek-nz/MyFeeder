@@ -20,7 +20,7 @@
  */
 
 /* 
- * $Id: TopupTransaction.cs 45 2022-06-06 12:15:22Z rhubarb-geek-nz $
+ * $Id: TopupTransaction.cs 46 2022-06-07 23:21:59Z rhubarb-geek-nz $
  */
 
 namespace MyFeeder
@@ -40,10 +40,9 @@ namespace MyFeeder
             STEP_TOPUP_FAILED = 99,               /* topup failed */
             STEP_COMPLETE = 100;                  /* transaction complete */
 
-        public const int 
+        public const int
             ENTRYMODE_MANUAL = 0,                 /* all fields are editable */
-            ENTRYMODE_EMV = 1,                    /* read EMV card */
-            ENTRYMODE_MSPAY = 2;                  /* use Microsoft Pay */                
+            ENTRYMODE_EMV = 1;                    /* read EMV card */
 
         internal int entryMode = ENTRYMODE_MANUAL;
         internal CreditCardState creditCard;
@@ -61,7 +60,7 @@ namespace MyFeeder
         internal TopupTransaction(App a, SnapperCardType s): base(a)
         {
             purseInfo = s.GetPurseInfo();
-            entryMode = app.isPaymentApiSupported ? ENTRYMODE_MSPAY : ENTRYMODE_EMV;
+            entryMode = ENTRYMODE_EMV;
         }
 
         internal bool Validate()
@@ -71,12 +70,8 @@ namespace MyFeeder
                 (!dialogBoxVisible) &&
                 (purseInfo != null) &&
                 (
-                    (entryMode == ENTRYMODE_MSPAY)
-                    ||
-                    (
-                        Utils.isValidCVV(cvv) &&
-                        (creditCard != null)
-                    )
+                    Utils.isValidCVV(cvv) &&
+                    (creditCard != null)
                 );
         }
     }

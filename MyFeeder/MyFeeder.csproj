@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -147,7 +147,6 @@
     <Compile Include="AppTaskConnectFeeder.cs" />
     <Compile Include="AppTaskReadCardState.cs" />
     <Compile Include="AppTaskWaitForNXPReady.cs" />
-    <Compile Include="BasicCardResponse.cs" />
     <Compile Include="CalypsoCardType.cs" />
     <Compile Include="CardTransaction.cs" />
     <Compile Include="CardType.cs" />
@@ -163,7 +162,6 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MicrosoftPay.cs" />
     <Compile Include="NXPDriver.cs" />
     <Compile Include="PageEventHandler.cs" />
     <Compile Include="PaymentAddress.cs" />
@@ -190,6 +188,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\nfc.png" />
+    <Content Include="Assets\usb.png" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\BadgeLogo.scale-125.png" />
     <Content Include="Assets\BadgeLogo.scale-150.png" />
